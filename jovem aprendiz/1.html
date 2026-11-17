@@ -26,6 +26,87 @@
 </main>
 
 <body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição Jovem Aprendiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .campo { margin-bottom: 20px; }
+        label { font-weight: bold; }
+        .opcao { font-weight: normal; margin-right: 15px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Formulário de Inscrição - Jovem Aprendiz</h2>
+
+    <form id="form-aprendiz" onsubmit="verificarEAvancar(event)">
+        
+       
+        <div class="campo">
+            <p><strong>Você se considera Pessoa com Deficiência (PCD)?</strong></p>
+            
+            <input type="radio" id="pcd-sim" name="pcd" value="sim" onchange="atualizarRegrasPCD()" required>
+            <label for="pcd-sim" class="opcao">Sim</label>
+
+            <input type="radio" id="pcd-nao" name="pcd" value="nao" onchange="atualizarRegrasPCD()">
+            <label for="pcd-nao" class="opcao">Não</label>
+
+            
+            <span id="hud-pcd" style="font-weight: bold; margin-left: 10px;"></span>
+        </div>
+
+     
+        <div class="campo">
+            <label for="idade">Digite sua Idade:</label><br><br>
+            <input type="number" id="idade" name="idade" min="14" max="24" required>
+            <small id="aviso-idade" style="color: gray; margin-left: 10px;">(Mínimo 14 anos)</small>
+        </div>
+
+      
+        <button type="submit">Verificar Vagas</button>
+
+    </form>
+
+    <script>
+        
+        function atualizarRegrasPCD() {
+            var simMarcado = document.getElementById('pcd-sim').checked;
+            var hud = document.getElementById('hud-pcd');
+            var campoIdade = document.getElementById('idade');
+            var avisoIdade = document.getElementById('aviso-idade');
+
+            if (simMarcado) {
+               
+                hud.innerText = "✔️ Certo (Sem limite máximo de idade)";
+                hud.style.color = "green";
+                campoIdade.removeAttribute('max');
+                avisoIdade.innerText = "(Sem limite máximo para PCD)";
+            } else {
+               
+                hud.innerText = "❌ Não PCD (Limite de 24 anos)";
+                hud.style.color = "red";
+                campoIdade.setAttribute('max', '24');
+                avisoIdade.innerText = "(Mínimo 14 e máximo 24 anos)";
+            }
+        }
+
+
+        function verificarEAvancar(event) {
+           
+            event.preventDefault(); 
+            
+          
+            window.location.href = "lista.html";
+        }
+    </script>
+
+</body>
+</html>
 
 
 </body>
